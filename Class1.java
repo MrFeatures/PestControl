@@ -10,9 +10,9 @@ import java.io.IOException; //for handling errors
 
 public class Class1
 {
-    // instance variables - replace the example below with your own
-    private int x;
-    
+    boolean running = true;
+    int land;           //a varibul to store land size (in m²)
+    String pest;        //stores the type of pest 
     Scanner scanner = new Scanner(System.in);//create a scanner
 
 
@@ -30,23 +30,28 @@ public class Class1
         System.out.println("┃┏━┓┃━━━━━━━━┏┛┗┓━━━━┃┏━┓┃━━━━━━━━┏┛┗┓━━━━━━━┃┃━━━━━┃┏━┓┃━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┗━┛┃┏━━┓┏━━┓┗┓┏┛━━━━┃┃━┗┛┏━━┓┏━┓━┗┓┏┛┏━┓┏━━┓┃┃━━━━━┃┗━┛┃┏━┓┏━━┓┏━━┓┏━┓┏━━┓━┏┓┏┓");
         System.out.println("┃┏━━┛┃┏┓┃┃━━┫━┃┃━━━━━┃┃━┏┓┃┏┓┃┃┏┓┓━┃┃━┃┏┛┃┏┓┃┃┃━━━━━┃┏━━┛┃┏┛┃┏┓┃┃┏┓┃┃┏┛┗━┓┃━┃┗┛┃");
-        System.out.println("┃┃━━━┃┃━┫┣━━┃━┃┗┓━━━━┃┗━┛┃┃┗┛┃┃┃┃┃━┃┗┓┃┃━┃┗┛┃┃┗┓━━━━┃┃━━━┃┃━┃┗┛┃┃┗┛┃┃┃━┃┗┛┗┓┃┃┃┃");
+        System.out.println("┃┃━━━┃┗━┫┣━━┃━┃┗┓━━━━┃┗━┛┃┃┗┛┃┃┃┃┃━┃┗┓┃┃━┃┗┛┃┃┗┓━━━━┃┃━━━┃┃━┃┗┛┃┃┗┛┃┃┃━┃┗┛┗┓┃┃┃┃");
         System.out.println("┗┛━━━┗━━┛┗━━┛━┗━┛━━━━┗━━━┛┗━━┛┗┛┗┛━┗━┛┗┛━┗━━┛┗━┛━━━━┗┛━━━┗┛━┗━━┛┗━┓┃┗┛━┗━━━┛┗┻┻┛");
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┏━┛┃━━━━━━━━━━━━");
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┗━━┛━━━━━━━━━━━━");
-        
+        System.out.println("Welcome to a pest control program");
+        System.out.println("created by Seton Spence");
+        System.out.println("this program takes multipul imputs and givs reccomendations on how to control pests");
         System.out.println("type help for help");
         //System.out.println("******");
     }
     
-    boolean running = true;
     void imput(){
         String Command;
         while(running == true){//the while loop that deals with imput
-            Command = scanner.nextLine();//each time the loop runs thrugh set command as the line enterd next. this givs a neer instant responce when a command in enterd
+            Command = scanner.nextLine();//each time the loop runs thrugh set command as the line enterd next.
             Command = Command.toLowerCase();//set the string to lower case to deal with captlisation e.g. FoWaRD --> foward 
             switch (Command){
-                case "pest" :
+                case "type of pest" : case "pest" :
+                    
+                break;
+                
+                case "ammount of land" : case "land" :
                     
                 break;
                 
@@ -55,6 +60,8 @@ public class Class1
                     System.out.println("command place holder 1");
                     System.out.println("command place holder 2");
                     System.out.println("command place holder 3");
+                    System.out.println("end - kills program");
+                    System.out.println("type help [name of command] for more infomation on a command");
                 break;
                 
                 case "end" :
