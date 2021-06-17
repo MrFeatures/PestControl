@@ -17,7 +17,13 @@ public class Class1
     String pest;        //stores the type of pest 
     Scanner scanner = new Scanner(System.in);//create a scanner
     int kullNo;
+    String pestMe;
+    int reproRate;      
+    String pestData [];
     
+    File pestDataFile = new File();
+    File pestDataFile = new File();
+    File pestDataFile = new File();
 
     public Class1()
     {
@@ -89,6 +95,24 @@ public class Class1
     }
     
     void write(){
+        
+    }
+    
+    
+    boolean pestFound = false;
+    void read(){
+        pestFound = false;
+        
+        while (!pestFound && file.hasNextline()){
+            String nextLine = file.nextLine();
+            pestData = line.split(",");
+            
+            if(pestData[0] == pest){
+                pestFound = true;
+            }
+        }
+        
+        
         
     }
     
