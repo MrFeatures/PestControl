@@ -48,6 +48,10 @@ public class Class1
         System.out.println("this program takes multipul imputs and givs reccomendations on how to control pests");
         System.out.println("type help for help");
         //System.out.println("******");
+        
+        /*try {
+            
+        } catch (IOException e) {System.out.println("file reading error");}*/
     }
     
     void imput(){
@@ -112,7 +116,7 @@ public class Class1
                 String nextLine = reader.nextLine();
                 pestData = nextLine.split(",");
             
-                if(pestData[0] == pest){
+                if(pestData[0] .equals("pest")){
                     pestFound = true;
                 }
             }
