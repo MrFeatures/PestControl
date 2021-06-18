@@ -21,9 +21,9 @@ public class Class1
     int reproRate;      
     String pestData [];
     
-    File pestDataFile = new File();
-    File pestDataFile = new File();
-    File pestDataFile = new File();
+    File pestDataFile = new File("PestData.csv");
+    //File pestDataFile = new File();
+    //File pestDataFile = new File();
 
     public Class1()
     {
@@ -57,9 +57,13 @@ public class Class1
             Command = Command.toLowerCase();//set the string to lower case to deal with captlisation e.g. FoWaRD --> foward 
             switch (Command){
                 case "type of pest" : case "pest" :
-                    
+                    String newPest;
+                    System.out.println("enter new pest");
+                    newPest = scanner.nextLine();
+                    pest = newPest.toLowerCase();
+                    System.out.println("pest is now set to " + pest);
                 break;
-                
+                    
                 case "ammount of land" : case "land" :
                     
                 break;
@@ -102,16 +106,17 @@ public class Class1
     boolean pestFound = false;
     void read(){
         pestFound = false;
-        
-        while (!pestFound && file.hasNextline()){
-            String nextLine = file.nextLine();
-            pestData = line.split(",");
+        try{
+            Scanner reader = new Scanner (pestDataFile);
+            while (!pestFound && reader.hasNextLine()){
+                String nextLine = reader.nextLine();
+                pestData = nextLine.split(",");
             
-            if(pestData[0] == pest){
-                pestFound = true;
+                if(pestData[0] == pest){
+                    pestFound = true;
+                }
             }
-        }
-        
+        } catch (IOException e) {System.out.println("file reading error");}
         
         
     }
