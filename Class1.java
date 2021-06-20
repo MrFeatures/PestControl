@@ -95,6 +95,19 @@ public class Class1
                 running = false;
                 break;
                 
+                case "findpest" :
+                read();
+                /*if (pestFound == true){
+                    System.out.println("pest found");
+                }else if (pestFound == false){
+                    System.out.println("pest not found");
+                }*/
+                break;
+                
+                case "test" :
+                System.out.println(pest);
+                break;
+                
                 default :
                 System.out.println("unknown command");
                 break;
@@ -108,16 +121,23 @@ public class Class1
     
     
     boolean pestFound = false;
+    String temps;
     void read(){
-        pestFound = false;
+
         try{
             Scanner reader = new Scanner (pestDataFile);
+            pestFound = false;
             while (!pestFound && reader.hasNextLine()){
                 String nextLine = reader.nextLine();
                 pestData = nextLine.split(",");
-            
+                
+                System.out.println("finding pest");
+                System.out.println(pestData);
+                System.out.println(Arrays.toString(pestData));
+                temps = Arrays.toString(pestData[0]);
                 if(pestData[0] .equals("pest")){
                     pestFound = true;
+                    System.out.println("pestFound");
                 }
             }
         } catch (IOException e) {System.out.println("file reading error");}
