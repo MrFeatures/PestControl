@@ -20,6 +20,8 @@ public class Class1
     String pestMe;
     int reproRate;      
     String pestData [];
+    String temp[];
+    String pestList[];
     
     File pestDataFile = new File("PestData.csv");
     //File pestDataFile = new File();
@@ -49,9 +51,18 @@ public class Class1
         System.out.println("type help for help");
         //System.out.println("******");
         
-        /*try {
-            
-        } catch (IOException e) {System.out.println("file reading error");}*/
+        try {
+            Scanner reader = new Scanner (pestDataFile);
+            while (reader.hasNextLine()){
+                int i = -1; 
+                i++;
+                String nextLine = reader.nextLine();
+                temp = nextLine.split(",");
+                pestList[i] = temp[0];
+                System.out.println(Arrays.toString(temp));
+                
+            }
+        } catch (IOException e) {System.out.println("file reading error");}
     }
     
     void imput(){
@@ -97,15 +108,17 @@ public class Class1
                 
                 case "findpest" :
                 read();
-                /*if (pestFound == true){
+                if (pestFound == true){
                     System.out.println("pest found");
                 }else if (pestFound == false){
                     System.out.println("pest not found");
-                }*/
+                }
                 break;
                 
                 case "test" :
+                System.out.println("Current pest:");
                 System.out.println(pest);
+                System.out.println(Arrays.toString(pestList));
                 break;
                 
                 default :
@@ -121,7 +134,7 @@ public class Class1
     
     
     boolean pestFound = false;
-    String temps;
+
     void read(){
 
         try{
@@ -132,12 +145,11 @@ public class Class1
                 pestData = nextLine.split(",");
                 
                 System.out.println("finding pest");
-                System.out.println(pestData);
-                System.out.println(Arrays.toString(pestData));
-                temps = Arrays.toString(pestData[0]);
-                if(pestData[0] .equals("pest")){
+                System.out.println(pestData[0]);
+                //System.out.println(Arrays.toString(pestData));
+                if(pestData[0].equals(pest)){
                     pestFound = true;
-                    System.out.println("pestFound");
+                    //System.out.println("pestFound");
                 }
             }
         } catch (IOException e) {System.out.println("file reading error");}
