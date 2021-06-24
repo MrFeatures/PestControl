@@ -21,8 +21,8 @@ public class Class1
     int reproRate;      
     String pestData [];
     String temp[];
-    String pestList[];
-    
+    String pestList[] = new String[255];
+
     File pestDataFile = new File("PestData.csv");
     //File pestDataFile = new File();
     //File pestDataFile = new File();
@@ -33,10 +33,24 @@ public class Class1
         startUp();
         imput();
     }
-    
+
     void startUp(){
         System.out.println("******");
-        
+
+        try {
+            Scanner reader = new Scanner (pestDataFile);
+            while (reader.hasNextLine()){
+                int i = 0; 
+                String nextLine = reader.nextLine();
+                temp = nextLine.split(",");
+
+                pestList[i] = temp[0];;
+                System.out.println(Arrays.toString(temp));
+                System.out.println(pestList[i]);
+                i++;
+            }
+        } catch (IOException e) {System.out.println("file reading error");}
+
         System.out.println("┏━━━┓━━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━┏┓━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┏━┓┃━━━━━━━━┏┛┗┓━━━━┃┏━┓┃━━━━━━━━┏┛┗┓━━━━━━━┃┃━━━━━┃┏━┓┃━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┗━┛┃┏━━┓┏━━┓┗┓┏┛━━━━┃┃━┗┛┏━━┓┏━┓━┗┓┏┛┏━┓┏━━┓┃┃━━━━━┃┗━┛┃┏━┓┏━━┓┏━━┓┏━┓┏━━┓━┏┓┏┓");
@@ -50,21 +64,8 @@ public class Class1
         System.out.println("this program takes multipul imputs and givs reccomendations on how to control pests");
         System.out.println("type help for help");
         //System.out.println("******");
-        
-        try {
-            Scanner reader = new Scanner (pestDataFile);
-            while (reader.hasNextLine()){
-                int i = -1; 
-                i++;
-                String nextLine = reader.nextLine();
-                temp = nextLine.split(",");
-                pestList[i] = temp[0];
-                System.out.println(Arrays.toString(temp));
-                
-            }
-        } catch (IOException e) {System.out.println("file reading error");}
+
     }
-    
     void imput(){
         String Command;
         while(running == true){//the while loop that deals with imput
@@ -72,40 +73,40 @@ public class Class1
             Command = Command.toLowerCase();//set the string to lower case to deal with captlisation e.g. FoWaRD --> foward 
             switch (Command){
                 case "type of pest" : case "pest" :
-                    String newPest;
-                    System.out.println("enter new pest");
-                    newPest = scanner.nextLine();
-                    pest = newPest.toLowerCase();
-                    System.out.println("pest is now set to " + pest);
+                String newPest;
+                System.out.println("enter new pest");
+                newPest = scanner.nextLine();
+                pest = newPest.toLowerCase();
+                System.out.println("pest is now set to " + pest);
                 break;
-                    
+
                 case "ammount of land" : case "land" :
-                    
+
                 break;
-                
+
                 case "calculate" : case "go" :
-                    math();
-                    System.out.println("number of pests needed to kull per month to control population: ");
-                    System.out.println(kullNo);
-                    System.out.println("reccomended pest control method for population control:");
-                    
-                    System.out.println("number of pests needed to kull per month over a 12 month period to remove population:");
+                math();
+                System.out.println("number of pests needed to kull per month to control population: ");
+                System.out.println(kullNo);
+                System.out.println("reccomended pest control method for population control:");
+
+                System.out.println("number of pests needed to kull per month over a 12 month period to remove population:");
                 break;
-                
+
                 case "help" :
-                    System.out.println("here is a list of commands:");
-                    System.out.println("command place holder 1");
-                    System.out.println("command place holder 2");
-                    System.out.println("command place holder 3");
-                    System.out.println("end - kills program");
-                    System.out.println("type help [name of command] for more infomation on a command");
+                System.out.println("here is a list of commands:");
+                System.out.println("command place holder 1");
+                System.out.println("command place holder 2");
+                System.out.println("command place holder 3");
+                System.out.println("end - kills program");
+                System.out.println("type help [name of command] for more infomation on a command");
                 break;
-                
+
                 case "end" :
                 System.out.println("program terminated");
                 running = false;
                 break;
-                
+
                 case "findpest" :
                 read();
                 if (pestFound == true){
@@ -114,36 +115,33 @@ public class Class1
                     System.out.println("pest not found");
                 }
                 break;
-                
+
                 case "test" :
                 System.out.println("Current pest:");
                 System.out.println(pest);
                 System.out.println(Arrays.toString(pestList));
                 break;
-                
+
                 default :
                 System.out.println("unknown command");
                 break;
             }
         }   
     }
-    
+
     void write(){
-        
+
     }
-    
-    
+
     boolean pestFound = false;
-
     void read(){
-
         try{
             Scanner reader = new Scanner (pestDataFile);
             pestFound = false;
             while (!pestFound && reader.hasNextLine()){
                 String nextLine = reader.nextLine();
                 pestData = nextLine.split(",");
-                
+
                 System.out.println("finding pest");
                 System.out.println(pestData[0]);
                 //System.out.println(Arrays.toString(pestData));
@@ -153,11 +151,9 @@ public class Class1
                 }
             }
         } catch (IOException e) {System.out.println("file reading error");}
-        
-        
+
     }
-    
+
     void math(){
-        
     }
 }
