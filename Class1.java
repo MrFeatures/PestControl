@@ -1,7 +1,5 @@
 /**
- *
  * @author Seton Spence
- * @version 0.1
  */
 
 import java.util.Scanner;   //Scanner for keybord imput and file reading
@@ -21,7 +19,7 @@ public class Class1
     int reproRate;      
     String pestData [];
     String temp[];
-    String pestList[] = new String[255];
+    String pestList[] = new String[6];
 
     File pestDataFile = new File("PestData.csv");
     //File pestDataFile = new File();
@@ -36,20 +34,21 @@ public class Class1
 
     void startUp(){
         System.out.println("******");
-
+        System.out.println("initiating file reading");
         try {
             Scanner reader = new Scanner (pestDataFile);
-            while (reader.hasNextLine()){
-                int i = 0; 
+            int i = 0;
+            while (reader.hasNextLine()){ 
                 String nextLine = reader.nextLine();
                 temp = nextLine.split(",");
-
+                
                 pestList[i] = temp[0];;
                 System.out.println(Arrays.toString(temp));
                 System.out.println(pestList[i]);
-                i++;
+                System.out.println(Arrays.toString(pestList));
+                i = i + 1;
             }
-        } catch (IOException e) {System.out.println("file reading error");}
+        } catch (IOException e) {System.out.println("file reading error (start up)");}
 
         System.out.println("┏━━━┓━━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━┏┓━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┏━┓┃━━━━━━━━┏┛┗┓━━━━┃┏━┓┃━━━━━━━━┏┛┗┓━━━━━━━┃┃━━━━━┃┏━┓┃━━━━━━━━━━━━━━━━━━━━━━━");
@@ -66,6 +65,7 @@ public class Class1
         //System.out.println("******");
 
     }
+
     void imput(){
         String Command;
         while(running == true){//the while loop that deals with imput
@@ -76,14 +76,23 @@ public class Class1
                 String newPest;
                 System.out.println("enter new pest");
                 newPest = scanner.nextLine();
-                pest = newPest.toLowerCase();
-                System.out.println("pest is now set to " + pest);
+                newPest = newPest.toLowerCase();
+                boolean pestCheck = Arrays.stream(pestList).anyMatch(newPest::equals);
+                if (pestCheck == true){
+                    pest = newPest;
+                    System.out.println("pest is now set to " + pest);
+                } else {
+                    System.out.println("invalid pest entered");
+                }
+                
                 break;
-
+                //*********************************************************
                 case "ammount of land" : case "land" :
-
+                System.out.println("enter new ammount of land (m²)");
+                land = scanner.nextInt();
+                System.out.println("ammount of land is now set to " + land + "m²");
                 break;
-
+                //*********************************************************
                 case "calculate" : case "go" :
                 math();
                 System.out.println("number of pests needed to kull per month to control population: ");
@@ -92,7 +101,7 @@ public class Class1
 
                 System.out.println("number of pests needed to kull per month over a 12 month period to remove population:");
                 break;
-
+                //*********************************************************
                 case "help" :
                 System.out.println("here is a list of commands:");
                 System.out.println("command place holder 1");
@@ -101,12 +110,12 @@ public class Class1
                 System.out.println("end - kills program");
                 System.out.println("type help [name of command] for more infomation on a command");
                 break;
-
+                //*********************************************************
                 case "end" :
                 System.out.println("program terminated");
                 running = false;
                 break;
-
+                //*********************************************************
                 case "findpest" :
                 read();
                 if (pestFound == true){
@@ -115,13 +124,15 @@ public class Class1
                     System.out.println("pest not found");
                 }
                 break;
-
+                //*********************************************************
                 case "test" :
                 System.out.println("Current pest:");
                 System.out.println(pest);
+                System.out.println("Current ammount of land:");
+                System.out.println(land);
                 System.out.println(Arrays.toString(pestList));
                 break;
-
+                //*********************************************************
                 default :
                 System.out.println("unknown command");
                 break;
