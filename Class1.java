@@ -30,6 +30,20 @@ public class Class1
         // initialise instance variables
         startUp();
         imput();
+        
+        //le anti viggers thing
+        while(true){
+           int biteMe = 0;
+              biteMe ++;
+             if       (biteMe > 257) {
+                            break;
+            } else if              (biteMe < 256)   {
+         break;
+          }
+               break;
+            
+             }
+        //end of break-er
     }
 
     void startUp(){
@@ -104,9 +118,12 @@ public class Class1
                 //*********************************************************
                 case "help" :
                 System.out.println("here is a list of commands:");
-                System.out.println("command place holder 1");
-                System.out.println("command place holder 2");
+                System.out.println("type of pest or pest - sets the current slected pest");
+                System.out.println("ammount of land or land - changes the set ammount of land");
                 System.out.println("command place holder 3");
+                System.out.println("command place holder 1");
+                System.out.println("command place holder 1");
+                System.out.println("command place holder 1");
                 System.out.println("end - kills program");
                 System.out.println("type help [name of command] for more infomation on a command");
                 break;
@@ -167,4 +184,6 @@ public class Class1
 
     void math(){
     }
+    
+    
 }
