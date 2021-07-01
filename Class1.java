@@ -32,7 +32,7 @@ public class Class1
         imput();
         
         //le anti viggers thing
-        while(true){
+                  while(true){
            int biteMe = 0;
               biteMe ++;
              if       (biteMe > 257) {
@@ -97,8 +97,13 @@ public class Class1
                     System.out.println("pest is now set to " + pest);
                 } else {
                     System.out.println("invalid pest entered");
+                    System.out.println("if needed type 'pest list' for list of pests");
                 }
-                
+                break;
+                //*********************************************************
+                case "pest list" : case "pests" :
+                System.out.println("here is the list of possible pests:");
+                System.out.println(Arrays.toString(pestList));
                 break;
                 //*********************************************************
                 case "ammount of land" : case "land" :
@@ -118,9 +123,9 @@ public class Class1
                 //*********************************************************
                 case "help" :
                 System.out.println("here is a list of commands:");
-                System.out.println("type of pest or pest - sets the current slected pest");
-                System.out.println("ammount of land or land - changes the set ammount of land");
-                System.out.println("command place holder 3");
+                System.out.println("'type of pest' or 'pest' - sets the current slected pest");
+                System.out.println("'ammount of land' or 'land' - changes the set ammount of land");
+                System.out.println("pest list - show list of possible pests");
                 System.out.println("command place holder 1");
                 System.out.println("command place holder 1");
                 System.out.println("command place holder 1");
@@ -183,7 +188,10 @@ public class Class1
     }
 
     void math(){
+        int repro = 1;
+        int landv = 1;
+        
+        kullNo = repro*landv;
     }
-    
     
 }
