@@ -208,13 +208,23 @@ public class Class1
         } catch (IOException e) {System.out.println("file reading error");}
         //*********************************************************
         kullNo = repro*landv;
-        
-        /*switch (kullNo){
-            case > 10 :
+        //*********************************************************
+        if (kullNo <= 10) {
             
-            break;
+        } else if (kullNo > 10 && kullNo <= 20){
             
-        }*/
+        } else if (kullNo > 20 && kullNo <= 30){
+            
+        } else if (kullNo > 30 && kullNo <= 40){
+            
+        } else if (kullNo > 40 && kullNo <= 50){
+            
+        } else if (kullNo > 50 && kullNo <= 60){
+            
+        } else if (kullNo > 60){
+            
+        } 
+        //*********************************************************
     }
     
 }
