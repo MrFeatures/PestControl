@@ -49,6 +49,7 @@ public class Class1
     void startUp(){
         System.out.println("******");
         System.out.println("initiating file reading");
+        //*********************************************************
         try {
             Scanner reader = new Scanner (pestDataFile);
             int i = 0;
@@ -56,14 +57,14 @@ public class Class1
                 String nextLine = reader.nextLine();
                 temp = nextLine.split(",");
                 
-                pestList[i] = temp[0];;
+                pestList[i] = temp[0];
                 System.out.println(Arrays.toString(temp));
                 System.out.println(pestList[i]);
                 System.out.println(Arrays.toString(pestList));
                 i = i + 1;
             }
         } catch (IOException e) {System.out.println("file reading error (start up)");}
-
+        //*********************************************************
         System.out.println("┏━━━┓━━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━┏┓━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┏━┓┃━━━━━━━━┏┛┗┓━━━━┃┏━┓┃━━━━━━━━┏┛┗┓━━━━━━━┃┃━━━━━┃┏━┓┃━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┗━┛┃┏━━┓┏━━┓┗┓┏┛━━━━┃┃━┗┛┏━━┓┏━┓━┗┓┏┛┏━┓┏━━┓┃┃━━━━━┃┗━┛┃┏━┓┏━━┓┏━━┓┏━┓┏━━┓━┏┓┏┓");
@@ -77,15 +78,18 @@ public class Class1
         System.out.println("this program takes multipul imputs and givs reccomendations on how to control pests");
         System.out.println("type help for help");
         //System.out.println("******");
-
+        //*********************************************************
     }
 
     void imput(){
         String Command;
         while(running == true){//the while loop that deals with imput
+            //*********************************************************
             Command = scanner.nextLine();//each time the loop runs thrugh set command as the line enterd next.
             Command = Command.toLowerCase();//set the string to lower case to deal with captlisation e.g. FoWaRD --> foward 
+            //*********************************************************
             switch (Command){
+                //*********************************************************
                 case "type of pest" : case "pest" :
                 String newPest;
                 System.out.println("enter new pest");
@@ -127,8 +131,8 @@ public class Class1
                 System.out.println("'ammount of land' or 'land' - changes the set ammount of land");
                 System.out.println("pest list - show list of possible pests");
                 System.out.println("command place holder 1");
-                System.out.println("command place holder 1");
-                System.out.println("command place holder 1");
+                System.out.println("command place holder 2");
+                System.out.println("command place holder 3");
                 System.out.println("end - kills program");
                 System.out.println("type help [name of command] for more infomation on a command");
                 break;
@@ -190,8 +194,27 @@ public class Class1
     void math(){
         int repro = 1;
         int landv = 1;
-        
+        //*********************************************************
+        try{
+            Scanner reader = new Scanner (pestDataFile);
+            while (!pestFound && reader.hasNextLine()){
+                String nextLine = reader.nextLine();
+                pestData = nextLine.split(",");
+
+                if(pestData[0].equals(pest)){
+                    repro = Integer.parseInt(pestData[1]);
+                }
+            }
+        } catch (IOException e) {System.out.println("file reading error");}
+        //*********************************************************
         kullNo = repro*landv;
+        
+        /*switch (kullNo){
+            case > 10 :
+            
+            break;
+            
+        }*/
     }
     
 }
