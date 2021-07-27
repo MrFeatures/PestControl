@@ -10,18 +10,20 @@ import java.io.IOException; //for handling errors
 
 public class Class1
 {
-    boolean running = true;//is the program running
-    int land;           //stores land size (in m²)
-    String pest;        //stores the type of pest 
-    Scanner scanner = new Scanner(System.in);//create a scanner
-    int kullNo;
-    String pestMe;
-    int reproRate;      
-    String pestData [];
-    String temp[];
-    String pestList[] = new String[6];
+    //*********************************************************
+    //this is where my primary varibles are initialized
+    Scanner inputScanner = new Scanner(System.in);  //a scanner that will be uesd for user input
+    boolean running = true;                         //is the program running
+    int land;                                       //stores land size (in m²)
+    int kullNo;                                     //will store the number of pests needed to be kulled
+    int reproRate;                                  //slected pests reproduction rate (from file)
+    
+    String pest;                                    //stores the type of pest (also used to get data from csv file)
+    String pestData [];                             //
+    String temp[];                                  //
+    String pestList[] = new String[6];              //
 
-    File pestDataFile = new File("PestData.csv");
+    File pestDataFile = new File("PestData.csv");   //
     //File pestDataFile = new File();
     //File pestDataFile = new File();
 
@@ -29,7 +31,7 @@ public class Class1
     {
         // initialise instance variables
         startUp();
-        imput();
+        input();
         
         //le anti viggers thing
                   while(true){
@@ -51,10 +53,10 @@ public class Class1
         System.out.println("initiating file reading");
         //*********************************************************
         try {
-            Scanner reader = new Scanner (pestDataFile);
+            Scanner fileReader = new Scanner (pestDataFile);
             int i = 0;
-            while (reader.hasNextLine()){ 
-                String nextLine = reader.nextLine();
+            while (fileReader.hasNextLine()){ 
+                String nextLine = fileReader.nextLine();
                 temp = nextLine.split(",");
                 
                 pestList[i] = temp[0];
@@ -81,11 +83,11 @@ public class Class1
         //*********************************************************
     }
 
-    void imput(){
+    void input(){
         String Command;
         while(running == true){//the while loop that deals with imput
             //*********************************************************
-            Command = scanner.nextLine();//each time the loop runs thrugh set command as the line enterd next.
+            Command = inputScanner.nextLine();//each time the loop runs thrugh set command as the line enterd next.
             Command = Command.toLowerCase();//set the string to lower case to deal with captlisation e.g. FoWaRD --> foward 
             //*********************************************************
             switch (Command){
@@ -93,7 +95,7 @@ public class Class1
                 case "type of pest" : case "pest" :
                 String newPest;
                 System.out.println("enter new pest");
-                newPest = scanner.nextLine();
+                newPest = inputScanner.nextLine();
                 newPest = newPest.toLowerCase();
                 boolean pestCheck = Arrays.stream(pestList).anyMatch(newPest::equals);
                 if (pestCheck == true){
@@ -112,7 +114,7 @@ public class Class1
                 //*********************************************************
                 case "ammount of land" : case "land" :
                 System.out.println("enter new ammount of land (m²)");
-                land = scanner.nextInt();
+                land = inputScanner.nextInt();
                 System.out.println("ammount of land is now set to " + land + "m²");
                 break;
                 //*********************************************************
@@ -173,10 +175,10 @@ public class Class1
     boolean pestFound = false;
     void read(){
         try{
-            Scanner reader = new Scanner (pestDataFile);
+            Scanner fileReader = new Scanner (pestDataFile);
             pestFound = false;
-            while (!pestFound && reader.hasNextLine()){
-                String nextLine = reader.nextLine();
+            while (!pestFound && fileReader.hasNextLine()){
+                String nextLine = fileReader.nextLine();
                 pestData = nextLine.split(",");
 
                 System.out.println("finding pest");
