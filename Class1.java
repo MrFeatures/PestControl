@@ -1,9 +1,10 @@
+
 /**
  * @author Seton Spence
  */
 
 import java.util.Scanner;   //Scanner for keybord imput and file reading
-import java.util.Arrays;
+import java.util.Arrays;    //for more complex arrays minupluation
 
 import java.io.File;        //for interacting with files
 import java.io.IOException; //for handling errors
@@ -16,20 +17,18 @@ public class Class1
     boolean running = true;                         //is the program running
     int land;                                       //stores land size (in m²)
     int kullNo;                                     //will store the number of pests needed to be kulled
-    int reproRate;                                  //slected pests reproduction rate (from file)
+    int reproRate;                                  //selected pests reproduction rate (from file)
     
     String pest;                                    //stores the type of pest (also used to get data from csv file)
-    String pestData [];                             //
-    String temp[];                                  //
-    String pestList[] = new String[6];              //
+    String pestData [];                             //holds data about selected pest
+    String temp[];                                  //temporay array
+    String pestList[] = new String[6];              //holds a list of pest saved in the csv data file
 
-    File pestDataFile = new File("PestData.csv");   //
-    //File pestDataFile = new File();
-    //File pestDataFile = new File();
-
+    File pestDataFile = new File("PestData.csv");   //this is the file that holds all pest names and modifiers
+    
     public Class1()
     {
-        // initialise instance variables
+        //initialise methods
         startUp();
         input();
         
@@ -49,7 +48,7 @@ public class Class1
     }
 
     void startUp(){
-        System.out.println("******");
+        System.out.println("******");                    
         System.out.println("initiating file reading");
         //*********************************************************
         try {
@@ -67,6 +66,7 @@ public class Class1
             }
         } catch (IOException e) {System.out.println("file reading error (start up)");}
         //*********************************************************
+        //splash screen and introduction to program
         System.out.println("┏━━━┓━━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━┏┓━━━━━━━━┏┓━━━━━┏━━━┓━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┏━┓┃━━━━━━━━┏┛┗┓━━━━┃┏━┓┃━━━━━━━━┏┛┗┓━━━━━━━┃┃━━━━━┃┏━┓┃━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("┃┗━┛┃┏━━┓┏━━┓┗┓┏┛━━━━┃┃━┗┛┏━━┓┏━┓━┗┓┏┛┏━┓┏━━┓┃┃━━━━━┃┗━┛┃┏━┓┏━━┓┏━━┓┏━┓┏━━┓━┏┓┏┓");
@@ -77,26 +77,28 @@ public class Class1
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┗━━┛━━━━━━━━━━━━");
         System.out.println("Welcome to a pest control program");
         System.out.println("created by Seton Spence");
-        System.out.println("this program takes multipul imputs and givs reccomendations on how to control pests");
+        System.out.println("this program takes multipul imputs and gives reccomendations on how to control pests");
         System.out.println("type help for help");
-        //System.out.println("******");
         //*********************************************************
     }
 
     void input(){
-        String Command;
-        while(running == true){//the while loop that deals with imput
+        String Command;         //
+        while(running == true){ //the while loop that deals with imput
             //*********************************************************
-            Command = inputScanner.nextLine();//each time the loop runs thrugh set command as the line enterd next.
-            Command = Command.toLowerCase();//set the string to lower case to deal with captlisation e.g. FoWaRD --> foward 
+            Command = inputScanner.nextLine();  //anytime someting is enterd into the termal, this is overwritten with the new command
+            Command = Command.toLowerCase();    //set the string to lower case to deal with captlisation e.g. FoWaRD --> foward 
             //*********************************************************
+            //all input to the program (excluding file) is done thrugh this switch
             switch (Command){
                 //*********************************************************
+                                    //the proses where a new pest is selected
                 case "type of pest" : case "pest" :
-                String newPest;
                 System.out.println("enter new pest");
+                String newPest;
                 newPest = inputScanner.nextLine();
                 newPest = newPest.toLowerCase();
+                //this checks if the pest that has been enterd matches pests in the csv file
                 boolean pestCheck = Arrays.stream(pestList).anyMatch(newPest::equals);
                 if (pestCheck == true){
                     pest = newPest;
@@ -107,17 +109,20 @@ public class Class1
                 }
                 break;
                 //*********************************************************
+                                    //shows the user possible pests to select
                 case "pest list" : case "pests" :
                 System.out.println("here is the list of possible pests:");
                 System.out.println(Arrays.toString(pestList));
                 break;
                 //*********************************************************
+                                    //uses for setting ammount of land
                 case "ammount of land" : case "land" :
                 System.out.println("enter new ammount of land (m²)");
                 land = inputScanner.nextInt();
                 System.out.println("ammount of land is now set to " + land + "m²");
                 break;
                 //*********************************************************
+                                    //this is the calulation stage and where pest control methods are reccomended
                 case "calculate" : case "go" :
                 math();
                 System.out.println("number of pests needed to kull per month to control population: ");
@@ -127,6 +132,7 @@ public class Class1
                 System.out.println("number of pests needed to kull per month over a 12 month period to remove population:");
                 break;
                 //*********************************************************
+                                    //user help
                 case "help" :
                 System.out.println("here is a list of commands:");
                 System.out.println("'type of pest' or 'pest' - sets the current slected pest");
@@ -139,11 +145,13 @@ public class Class1
                 System.out.println("type help [name of command] for more infomation on a command");
                 break;
                 //*********************************************************
+                                    //end command (primarily for debug)
                 case "end" :
                 System.out.println("program terminated");
                 running = false;
                 break;
                 //*********************************************************
+                                    //file reading debug command
                 case "findpest" :
                 read();
                 if (pestFound == true){
@@ -153,6 +161,7 @@ public class Class1
                 }
                 break;
                 //*********************************************************
+                                    //genral debug commands
                 case "test" :
                 System.out.println("Current pest:");
                 System.out.println(pest);
@@ -161,6 +170,7 @@ public class Class1
                 System.out.println(Arrays.toString(pestList));
                 break;
                 //*********************************************************
+                                    //default if an unknowen command is entered
                 default :
                 System.out.println("unknown command");
                 break;
